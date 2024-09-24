@@ -1,18 +1,16 @@
-use common::error::InfraError;
 use crate::database::connection::establish_connection;
 use crate::entities::prelude::User as UserEntity;
 use crate::entities::user::{ActiveModel, Entity};
-use anyhow::{anyhow, Error};
+use common::error::InfraError;
 use domain::model::user::User;
 use domain::repositories::user_repository::UserRepository;
 use sea_orm::prelude::*;
 use sea_orm::EntityTrait;
 use sea_orm::Set;
-
 pub struct UserRepositoryImpl {}
 
 impl UserRepository for UserRepositoryImpl {
-    async fn find_all(&self) -> Result<Vec<User>, Error> {
+    async fn find_all(&self) -> Result<Vec<User>, InfraError> {
         let db = establish_connection().await?;
         let models = UserEntity::find().all(&db).await?;
         let users: Vec<User> = models
@@ -26,7 +24,7 @@ impl UserRepository for UserRepositoryImpl {
         Ok(users)
     }
 
-    async fn find_by_id(&self, id: i32) -> Result<Option<User>, Error> {
+    async fn find_by_id(&self, id: i32) -> Result<Option<User>, InfraError> {
         let db = establish_connection().await?;
         let model = UserEntity::find_by_id(id).one(&db).await?;
         let user = model.map(|model| User {
@@ -36,27 +34,6 @@ impl UserRepository for UserRepositoryImpl {
         });
         Ok(user)
     }
-
-    // async fn create(&self, user: User) -> Result<User, Error> {
-    //     let db = establish_connection().await?;
-    //     let active_model = ActiveModel {
-    //         username: Set(user.username),
-    //         email: Set(user.email),
-    //         ..Default::default()
-    //     };
-
-    //     let insert_result = UserEntity::insert(active_model).exec(&db).await?;
-
-    //     // 重新查询插入的记录
-    //     let model = UserEntity::find_by_id(insert_result.last_insert_id).one(&db).await?;
-    //     let new_user = model.map(|model| User {
-    //         id: Some(model.id),
-    //         username: model.username,
-    //         email: model.email,
-    //     });
-
-    //     new_user.ok_or_else(|| anyhow!("Failed to retrieve new user"))
-    // }
     async fn create(&self, user: User) -> Result<User, InfraError> {
         let db = establish_connection().await.map_err(InfraError::from)?;
         let active_model = ActiveModel {
@@ -80,10 +57,14 @@ impl UserRepository for UserRepositoryImpl {
             username: model.username,
             email: model.email,
         });
-
+        // 如果你想用anyhow的话，需要使用`anyhow::Error`类型，而不是`InfraError`类型
+        // # Example
+        // ```
+        // new_user.ok_or_else(|| anyhow!("Failed to retrieve new user"))
+        // ```
         new_user.ok_or(InfraError::UserNotFound)
     }
-    async fn update(&self, user: User) -> Result<User, Error> {
+    async fn update(&self, user: User) -> Result<User, InfraError> {
         let db = establish_connection().await?;
         let active_model = ActiveModel {
             username: Set(user.username),
@@ -96,8 +77,7 @@ impl UserRepository for UserRepositoryImpl {
             .exec(&db)
             .await?;
         if update_result.rows_affected == 0 {
-            return Err(anyhow!("User not found or update failed"));
-            // return Err(CustomError::IOError("创建失败".into()).into());
+            return Err(InfraError::UserNotFound);
         }
         // 重新查询更新后的记录
         let model = UserEntity::find_by_id(user.id.unwrap()).one(&db).await?;
@@ -106,9 +86,9 @@ impl UserRepository for UserRepositoryImpl {
             username: model.username,
             email: model.email,
         });
-        updated_user_result.ok_or_else(|| anyhow!("Failed to retrieve updated user"))
+        updated_user_result.ok_or_else(|| InfraError::UserNotFound)
     }
-    async fn delete(&self, id: i32) -> Result<bool, Error> {
+    async fn delete(&self, id: i32) -> Result<bool, InfraError> {
         let db = establish_connection().await?;
         let delete_result = UserEntity::delete_many()
             .filter(<Entity as EntityTrait>::Column::Id.eq(id))

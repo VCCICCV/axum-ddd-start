@@ -19,17 +19,9 @@ pub async fn get_user(id: axum::extract::Path<i32>) -> impl IntoResponse {
 
 pub async fn create_user(user: axum::extract::Json<User>) -> impl IntoResponse {
     let result = UserService::new().create_user(user.0).await;
-    // match result {
-    //     Ok(new_user) => Res::with_data(new_user),
-    //     Err(err) => Res::with_err(&err.to_string()),
-    // }
     match result {
         Ok(new_user) => Res::with_data(new_user),
-        Err(err) => {
-            // Convert InfraError to a string for logging or user feedback
-            let error_message = err.to_string();
-            Res::with_err(&error_message)
-        }
+        Err(err) => Res::with_err(&err.to_string()),
     }
 }
 

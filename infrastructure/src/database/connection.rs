@@ -18,5 +18,4 @@ pub async fn establish_connection() -> Result<DatabaseConnection, DbErr> {
     let db_connection = Database::connect(config).await.unwrap();
     info!("Database connected");
     Ok(db_connection)
-    // sea_orm::Database::connect(config).await
 }

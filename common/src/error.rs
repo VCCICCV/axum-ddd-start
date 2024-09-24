@@ -24,4 +24,6 @@ pub enum InfraError {
     IoError(#[from] std::io::Error),
     #[error("User not found")]
     UserNotFound,
+    #[error("Other error: {0}")]
+    OtherError(String),
 }

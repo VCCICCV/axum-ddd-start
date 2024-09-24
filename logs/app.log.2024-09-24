@@ -45,3 +45,11 @@
 [2m2024-09-24T18:15:21.2626195Z[0m [32m INFO[0m [2minfrastructure::database::connection[0m[2m:[0m Database connected
 [2m2024-09-24T18:16:00.9516828Z[0m [32m INFO[0m [2minfrastructure::database::connection[0m[2m:[0m Database connected
 [2m2024-09-24T18:16:17.4457532Z[0m [32m INFO[0m [2minfrastructure::database::connection[0m[2m:[0m Database connected
+[2m2024-09-24T20:28:28.4529684Z[0m [32m INFO[0m [2minterface::api::api[0m[2m:[0m 🚀 listening on 127.0.0.1:8080
+[2m2024-09-24T20:36:31.2083458Z[0m [35mTRACE[0m [2maxum::serve[0m[2m:[0m received graceful shutdown signal. Telling tasks to shutdown
+[2m2024-09-24T20:36:31.208602Z[0m [35mTRACE[0m [2maxum::serve[0m[2m:[0m signal received, not accepting new connections
+[2m2024-09-24T20:36:31.2088902Z[0m [35mTRACE[0m [2maxum::serve[0m[2m:[0m waiting for 0 task(s) to finish
+[2m2024-09-24T20:36:40.6843384Z[0m [32m INFO[0m [2minterface::api::api[0m[2m:[0m 🚀 listening on 127.0.0.1:8080
+[2m2024-09-24T20:36:42.0757745Z[0m [35mTRACE[0m [2maxum::serve[0m[2m:[0m received graceful shutdown signal. Telling tasks to shutdown
+[2m2024-09-24T20:36:42.0759711Z[0m [35mTRACE[0m [2maxum::serve[0m[2m:[0m signal received, not accepting new connections
+[2m2024-09-24T20:36:42.0762671Z[0m [35mTRACE[0m [2maxum::serve[0m[2m:[0m waiting for 0 task(s) to finish
