@@ -11,3 +11,4 @@ axum = { workspace = true }
 anyhow = { workspace = true }
 tracing={workspace = true}
 common = {workspace = true}
+tokio = {workspace = true}

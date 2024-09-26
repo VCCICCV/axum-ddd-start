@@ -1,5 +1,8 @@
-use axum::{routing::{ delete, get, post, put }, Router};
-use crate::adapter::handler::{ create_user, delete_user, get_user, list_users, update_user };
+use crate::adapter::user_handler::{create_user, delete_user, get_user, list_users, update_user};
+use axum::{
+    routing::{delete, get, post, put},
+    Router,
+};
 pub async fn setup_user_routes() -> Router {
     Router::new()
         .route("/", get(list_users))

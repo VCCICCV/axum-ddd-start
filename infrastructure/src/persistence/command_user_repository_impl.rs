@@ -4,37 +4,14 @@ use crate::entities::prelude::User as UserEntity;
 use crate::entities::user::ActiveModel;
 use common::error::InfraError;
 use domain::model::user::User;
+use domain::repositories::command_user_repository::CommandUserRepository;
 use sea_orm::ColumnTrait;
 use sea_orm::EntityTrait;
 use sea_orm::QueryFilter;
 use sea_orm::Set;
-pub struct UserRepositoryImpl {}
+pub struct CommandUserRepositoryImpl {}
 
-impl UserRepository for UserRepositoryImpl {
-    async fn find_all(&self) -> Result<Vec<User>, InfraError> {
-        let db = establish_connection().await?;
-        let models = UserEntity::find().all(&db).await?;
-        let users: Vec<User> = models
-            .into_iter()
-            .map(|model| User {
-                id: Some(model.id),
-                username: model.username,
-                email: model.email,
-            })
-            .collect();
-        Ok(users)
-    }
-
-    async fn find_by_id(&self, id: i32) -> Result<Option<User>, InfraError> {
-        let db = establish_connection().await?;
-        let model = UserEntity::find_by_id(id).one(&db).await?;
-        let user = model.map(|model| User {
-            id: Some(model.id),
-            username: model.username,
-            email: model.email,
-        });
-        Ok(user)
-    }
+impl CommandUserRepository for CommandUserRepositoryImpl {
     async fn create(&self, user: User) -> Result<User, InfraError> {
         let db = establish_connection().await.map_err(InfraError::from)?;
         let active_model = ActiveModel {
@@ -58,11 +35,6 @@ impl UserRepository for UserRepositoryImpl {
             username: model.username,
             email: model.email,
         });
-        // 如果你想用anyhow的话，需要使用`anyhow::Error`类型，而不是`InfraError`类型
-        // # Example
-        // ```
-        // new_user.ok_or_else(|| anyhow!("Failed to retrieve new user"))
-        // ```
         new_user.ok_or(InfraError::UserNotFound)
     }
     async fn update(&self, user: User) -> Result<User, InfraError> {

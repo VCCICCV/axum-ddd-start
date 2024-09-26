@@ -61,6 +61,8 @@ members = [
     "migration",
     "common",
 ]
-
+# 启动和测试需要添加
 [dependencies]
 interface = { workspace = true }
+infrastructure = { workspace = true }
+tokio = { workspace = true }

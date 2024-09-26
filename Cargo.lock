@@ -141,6 +141,7 @@ dependencies = [
  "common",
  "domain",
  "infrastructure",
+ "tokio",
  "tracing",
 ]
 
@@ -388,7 +389,9 @@ dependencies = [
 name = "axum-ddd-start"
 version = "0.1.0"
 dependencies = [
+ "infrastructure",
  "interface",
+ "tokio",
 ]
 
 [[package]]
@@ -778,6 +781,7 @@ dependencies = [
  "sea-orm",
  "serde",
  "thiserror",
+ "tokio",
  "tracing",
 ]
 
