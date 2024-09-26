@@ -100,3 +100,5 @@
 [2m2024-09-26T16:07:11.1991329Z[0m [35mTRACE[0m [2maxum::serve[0m[2m:[0m waiting for 1 task(s) to finish
 [2m2024-09-26T16:07:11.1995542Z[0m [35mTRACE[0m [2maxum::serve[0m[2m:[0m connection 127.0.0.1:5116 closed
 [2m2024-09-26T16:07:18.8034463Z[0m [32m INFO[0m [2minterface::api::api[0m[2m:[0m 🚀 listening on 127.0.0.1:8080
+[2m2024-09-26T16:07:34.4837231Z[0m [35mTRACE[0m [2maxum::serve[0m[2m:[0m connection 127.0.0.1:6063 accepted
+[2m2024-09-26T16:07:34.6558806Z[0m [32m INFO[0m [2minfrastructure::database::connection[0m[2m:[0m Database connected

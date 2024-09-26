@@ -41,7 +41,7 @@ pub mod aggregate {}
 /// * 进程内事件总线（领域事件总线）：发布者与订阅者在同一个进程中，订阅者是出错会引起当前请求出错
 pub mod event {
     // 定义事件处理的trait，用于处理特定类型的事件
-    pub mod order_event;
+    pub mod user_event;
     // 事件总线侧重于业务领域事件的传播和处理
     pub mod event_bus {
         pub mod user_event_bus;
