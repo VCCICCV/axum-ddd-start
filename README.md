@@ -35,7 +35,7 @@
 
 * Axum：Web框架
 * Sea-orm：ORM
-* Tracing：日志管理
+* Tracing：日志管理，实现每日创建日志
 * Tokio：异步运行时
 * Tower
 * anyhow&thiserror：anyhow捕获错误，thiserror自定义错误

@@ -23,3 +23,7 @@ pub mod routers{
     pub mod user_routes;
     pub mod order_routes;
 }
+/// 配置
+pub mod config{
+    pub mod log;
+}
