@@ -4,7 +4,8 @@ mod entities;
 
 /// 数据库连接
 pub mod database{
-    pub mod connection;
+    pub mod db_connection;
+    pub mod redis_connection;
 }
 /// 与表的映射实体
 // pub mod entities{

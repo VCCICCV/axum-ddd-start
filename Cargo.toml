@@ -48,7 +48,11 @@ tracing-subscriber = { version = "0.3", default-features = true, features = [
 ] }
 # 日志记录器
 tracing-appender = "0.2.3"
-
+# redis 客户端
+redis = {version = "0.27.2",features = ["aio","tokio-comp"]}
+# 使用tokio实现的连接池，支持postgres、redis、redis cluster、rsmq等
+bb8 = "0.8.5"
+bb8-redis = "0.17.0"
 #Media Type
 mime = "0.3.17"
 [workspace]

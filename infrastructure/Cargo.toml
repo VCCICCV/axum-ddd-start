@@ -19,3 +19,6 @@ dotenvy={workspace=true}
 tracing={workspace=true}
 thiserror = { workspace = true }
 common = {workspace = true}
+bb8 = {workspace = true}
+redis={workspace = true}
+bb8-redis = {workspace = true}

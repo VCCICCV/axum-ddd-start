@@ -36,9 +36,10 @@
 * Axum：Web框架
 * Sea-orm：ORM
 * Tracing：日志管理，实现每日创建日志
-* Tokio：异步运行时
+* Tokio：异步运行时、单元测试
 * Tower
 * anyhow&thiserror：anyhow捕获错误，thiserror自定义错误
+* bb8：postgres、redis连接池
 
 ## 快速开始
 

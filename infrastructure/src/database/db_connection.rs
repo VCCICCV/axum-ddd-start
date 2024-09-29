@@ -2,8 +2,8 @@ use sea_orm::{ConnectOptions, Database, DatabaseConnection, DbErr};
 use std::env;
 use std::time::Duration;
 use tracing::info;
-
-pub async fn establish_connection() -> Result<DatabaseConnection, DbErr> {
+// 默认有连接池
+pub async fn establish_db_connection() -> Result<DatabaseConnection, DbErr> {
     let db_url = env::var("DATABASE_URL").expect("DATABASE_URL is not set in .env file");
     // 可选配置
     let mut config = ConnectOptions::new(&db_url);
